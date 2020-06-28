@@ -28,4 +28,8 @@ public class Topping {
     public double getPrice() {
         return this.price;
     }
+
+    public boolean isHealthy() {
+        return this.isHealthy;
+    }
 }

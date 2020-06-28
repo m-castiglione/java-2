@@ -28,7 +28,7 @@ public class Order {
     private Meal meal;
 
     private double totalPrice;
-    public ArrayList<Topping> toppingList = new ArrayList<Topping>();
+
     public ArrayList<Side> sidesList = new ArrayList<Side>();
     public ArrayList<Drink> drinksList = new ArrayList<Drink>();
     public ArrayList<Burger> burgerList = new ArrayList<Burger>();
@@ -63,12 +63,7 @@ public class Order {
     }
 
 
-    public ArrayList<Topping> getToppings() {
-        for (int i = 0; i < toppingList.size(); i++){
-            System.out.println(Arrays.toString(toppingList.toArray()));
-        }
-        return toppingList;
-    }
+
 
     public ArrayList<Side> getSides() {
         for (int i = 0; i < sidesList.size(); i++) {
@@ -91,24 +86,32 @@ public class Order {
         return burgerList;
     }
 
-    public void addToppings(Topping topping) {
-        if (this.toppingList.size() > 2){
-            System.out.println("No more toppings allowed");
-        } else {
-            System.out.println("Topping Added " + topping.getToppingName());
-            this.toppingList.add(topping);
+    //Dynamically adds any number of sides
+//    public void addSides(Side... side) {
+//        for (Side s : side) {
+//            if (this.sidesList.size() > 3) {
+//                System.out.println("No more sides allowed");
+//            } else {
+//                System.out.println("Side Added: " + s.getSideName());
+//                this.sidesList.add(s);
+//            }
+//        }
+//    }
+
+    public void addSides(Side... side) {
+        for (Side s : side) {
+            if (this.sidesList.size() >= 3) {
+                System.out.println("No more sides allowed");
+            } else if (this.sidesList.contains(s)){
+                System.out.println("Can't have duplicate sides");
+            } else {
+                System.out.println("Side Added: " + s.getSideName());
+                this.sidesList.add(s);
+            }
         }
     }
 
-    public void addSide(Side side) {
-        if (this.sidesList.size() > 3) {
-            System.out.println("No more sides allowed");
-        } else {
-            System.out.println("Side Added " + side.getSideName());
-            this.sidesList.add(side);
-        }
-    }
-
+    //Adds a drink to the order
     public void addDrink(Drink drink) {
         if (this.drinksList.size() > 1) {
             System.out.println("Only allowed one drink");
@@ -118,67 +121,27 @@ public class Order {
         }
     }
 
+    public void addBurger(Burger burger) {
+        if (this.burgerList.size() > 1) {
+            System.out.println("You can only have one burger type per order");
+        } else {
+            System.out.println("Burger Added");
+            this.burgerList.add(burger);
+        }
+    }
+
+        //Gets total price of an order
     public double totalPrice() {
-        for (int i = 0; i < toppingList.size(); i++) {
-            totalPrice += toppingList.get(i).getPrice();
+        for (int i = 0; i < sidesList.size(); i++) {
             totalPrice += sidesList.get(i).getSidePrice();
+        }
+
+        for (int i = 0; i < drinksList.size(); i++) {
             totalPrice += drinksList.get(i).getDrinkPrice();
         }
+
+        totalPrice += b.getTotalToppingsPrice();
+
         return totalPrice + b.plainBurgerPrice();
     }
-    /*public double addToppings() {
-
-
-        System.out.println("Here are the choices for toppings. Please enter the number associated with the topping you want: \n" +
-                "1. Lettuce $" + String.format("%.2f", lettuce) + "\n" + "2. Tomatoes $" + String.format("%.2f", tomatoes) + "\n" + "3. Carrots $" + String.format("%.2f", carrots) + "\n" + "4. Mustard $" + String.format("%.2f", mustard) + "\n" + "5. Ketchup $" + String.format("%.2f", ketchup) + "\n" +
-                "6. Relish $" + String.format("%.2f", relish) + "\n" + "7. Guacamole $" + String.format("%.2f", guacamole) + "\n" + "8. Cheese $" + String.format("%.2f", cheese) + "\n" + "9. Mayonnaise $" + String.format("%.2f", mayonnaise) + "\n" +
-                "10. Bacon $" + String.format("%.2f", bacon) + "\n" + "11. Onion $" + String.format("%.2f", onion) + "\n");
-
-        Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
-        int toppingChoice = Integer.valueOf(input);
-
-        do {
-            input = in.nextLine();
-            switch (toppingChoice) {
-                case 1: toppingPrice += lettuce;
-                    currentToppings++;
-                    break;
-                case 2: toppingPrice += tomatoes;
-                    currentToppings++;
-                    break;
-                case 3: toppingPrice += carrots;
-                    currentToppings++;
-                    break;
-                case 4: toppingPrice += mustard;
-                    currentToppings++;
-                    break;
-                case 5: toppingPrice += ketchup;
-                    currentToppings++;
-                    break;
-                case 6: toppingPrice += relish;
-                    currentToppings++;
-                    break;
-                case 7: toppingPrice += guacamole;
-                    currentToppings++;
-                    break;
-                case 8: toppingPrice += cheese;
-                    currentToppings++;
-                    break;
-                case 9: toppingPrice += mayonnaise;
-                    currentToppings++;
-                    break;
-                case 10: toppingPrice += bacon;
-                    currentToppings++;
-                    break;
-                case 11: toppingPrice += onion;
-                    currentToppings++;
-                    break;
-                default:System.out.println("ERROR: Wrong choice");
-                    break;
-            }
-        } while (input != null && currentToppings < MAX_TOPPINGS - 1);
-
-        return toppingPrice;
-    }*/
 }
