@@ -45,8 +45,11 @@ public class Burger {
         for (Topping t : toppings) {
             if (this.toppingList.size() >= MAX_TOPPINGS) {
                 System.out.println(t.getToppingName() + " is excluded. No more toppings allowed");
+            } else if (t.getCurrentAmount() >= t.getMaxAmount()) {
+                System.out.println("Can't have extra helpings");
             } else {
                 System.out.println("Topping Added:  " + t.getToppingName());
+                t.setCurrentAmount(t.getCurrentAmount() + 1);
                 this.toppingList.add(t);
             }
         }

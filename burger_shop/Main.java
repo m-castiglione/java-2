@@ -14,18 +14,10 @@ public class Main {
         HealthBurger hB = new HealthBurger(Bread.rye, Meat.beef);
         hB.addToppings(Topping.lettuce, Topping.tomato, Topping.cheese, Topping.onion);
         Meal meal = new Meal(Burger.plainBurger, Drink.coke, Side.fries);
-        System.out.println(meal);
         order.addSides(Side.pie, Side.fries);
         DeluxeBurger dB = new DeluxeBurger(Bread.rye, Meat.beef);
         Order o = new Order(burger, Bread.sourdough, Meat.roastBeef);
         o.addSides(Side.pie, Side.fries, Side.chips, Side.macNCheese);
         o.purchaseOrder();
-//        dB.addToppings(Topping.cheese);
-//        dB.addToppings(Topping.tomato);
-//        dB.addToppings(Topping.bacon);
-//        dB.addToppings(Topping.onion);
-//        dB.addToppings(Topping.guacamole);
-//        dB.addToppings(Topping.lettuce);
-//        dB.addToppings(Topping.ketchup);
     }
 }

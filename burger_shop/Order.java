@@ -62,9 +62,6 @@ public class Order {
         return b;
     }
 
-
-
-
     public ArrayList<Side> getSides() {
         for (int i = 0; i < sidesList.size(); i++) {
             System.out.println(Arrays.toString(sidesList.toArray()));
@@ -86,17 +83,6 @@ public class Order {
         return burgerList;
     }
 
-    //Dynamically adds any number of sides
-//    public void addSides(Side... side) {
-//        for (Side s : side) {
-//            if (this.sidesList.size() > 3) {
-//                System.out.println("No more sides allowed");
-//            } else {
-//                System.out.println("Side Added: " + s.getSideName());
-//                this.sidesList.add(s);
-//            }
-//        }
-//    }
 
     public void addSides(Side... side) {
         for (Side s : side) {
